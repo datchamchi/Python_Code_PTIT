@@ -37,6 +37,6 @@ output=""
 for i in range(0,len(lst)):
     output+=lst[i].__str__()
     if(i!=len(lst)-1): output+="\n"
-out = open('DIENTHOAI.txt','w')
+out = open('CATHI.in', 'w')
 out.write(output)
 
