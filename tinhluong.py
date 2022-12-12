@@ -34,22 +34,22 @@ def tim_pb(x):
     for i in listPb:
         if(i.ma== x): return i.ten
 
-n = int(input())
+n = int(input().strip())
 listPb = []
 while n>0:
     n-=1
-    str= input().split()
+    str= input().strip().split()
     pb =PhongBan(str[0],' '.join(str[1:]))
     listPb.append(pb)
 
-t = int(input())
+t = int(input().strip())
 listNv=[]
 while t>0:
     t-=1
-    ma =input()
-    tennv= input()
-    luongcb = float(input())
-    ngay = float(input())
+    ma =input().strip()
+    tennv= input().strip()
+    luongcb = float(input().strip())
+    ngay = float(input().strip())
     nv = NhanVien(ma, tennv, luongcb, ngay)
     nv.tenpb = tim_pb(nv.ma[3:])
     listNv.append(nv)
