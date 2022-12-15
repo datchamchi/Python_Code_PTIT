@@ -1,47 +1,31 @@
+from datetime import datetime
 class Tram:
-    def __init__(self,ma,ten,gio,phut,luongmua):
-        self.ma= ma
-        self.ten = ten
-        self.gio= gio
-        self.phut = phut
+    def __init__(self,ten,tgian,luongmua):
+        self.ten =ten
+        self.tgian = tgian
         self.luongmua= luongmua
-class Time:
-    def __int__(self,gio,phut):
-        self.gio = gio
-        self.phut= phut
-arr=[]
-# def check(name):
-#     for i in arr:
-#         if(i.ten == name): return True
-#     return False
 t= int(input())
+lst=[]
 while t>0:
     t-=1
-    tentram = input()
-    start= input().split(':')
-    gioStart= int(start[0])
-    phutStart= int(start[1])
-    end= input().split(':')
-    luongmua = int(input())
-    gioEnd = int(end[0])
-    phutEnd= int(end[1])
-    gio = gioEnd- gioStart
-    phut=0
-    if(phutEnd < phutStart):
-        gio-=1
-        phut= phutEnd - phutStart +60
-    else:
-        phut= phutEnd - phutStart
+    ten= input()
+    start= datetime.strptime(input(),'%H:%M')
+    end= datetime.strptime(input(),'%H:%M')
+    tgian = end- start
+    luongmua= int(input())
     check=0
-    for i in arr:
-        if(i.ten == tentram ):
-            check=1
-            i.gio += gio
-            i.phut += phut
+    for i in lst:
+        if(i.ten == ten):
+            i.tgian += tgian
             i.luongmua += luongmua
+            check=1
     if(check==0):
-        tram = Tram('T'+ str(101+ len(arr))[1:],tentram,gio,phut,luongmua)
-        arr.append(tram)
-for i in arr:
-    i.tb= float(i.luongmua/(i.gio + i.phut/60))
-    print(i.ma +" "+ i.ten +" " +'{:.2f}'.format(i.tb))
+        tram = Tram(ten,tgian,luongmua)
+        tram.ma= 'T'+str(101+ len(lst))[1:]
+        lst.append(tram)
+for i in lst:
+    gio = i.tgian.seconds //3600
+    phut= (i.tgian.seconds - gio *3600)/60
+    i.tb = i.luongmua /(gio+ phut/60)
+    print('{} {} {:.2f}'.format(i.ma, i.ten,i.tb))
+
